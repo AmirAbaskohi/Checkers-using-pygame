@@ -10,7 +10,7 @@ class Piece:
 		self.row = row
 		self.col = col
 		self.color = color
-		self.king = True
+		self.king = False
 		if self.color == RED:
 			self.direction = -1
 		else:
@@ -23,7 +23,7 @@ class Piece:
 		self.x = SQUARE_SIZE * self.col + SQUARE_SIZE // 2
 		self.y = SQUARE_SIZE * self.row + SQUARE_SIZE // 2
 
-	def make_king(self):
+	def makeKing(self):
 		self.king = True
 
 	def draw(self, win):
@@ -32,6 +32,11 @@ class Piece:
 		pygame.draw.circle(win, self.color, (self.x, self.y), radius)
 		if self.king:
 			win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2))
+
+	def move(self, row, col):
+		self.row = row
+		self.col = col
+		self.calPos()
 
 	def __repr__(self):
 		return str(self.color)

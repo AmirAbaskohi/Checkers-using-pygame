@@ -38,3 +38,17 @@ class Board:
 				piece = self.board[row][col]
 				if piece != 0:
 					piece.draw(win)
+
+	def move(self, piece, row, col):
+		self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
+		piece.move(row, col)
+
+		if row == ROWS or row == 0:
+			piece.makeKing()
+			if piece.color == WHITE:
+				self.whiteKings += 1
+			else:
+				self.whiteKings += 1
+
+	def getPiece(self, row, col):
+		return self.board[row][col]
