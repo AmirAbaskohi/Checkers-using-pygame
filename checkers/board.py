@@ -6,7 +6,6 @@ class Board:
 
 	def __init__(self):
 		self.board = []
-		self.selectedPiece = None
 		self.redLeft = self.whiteLeft = 12
 		self.redKings = self.whiteKings = 0
 		self.createBoard()
