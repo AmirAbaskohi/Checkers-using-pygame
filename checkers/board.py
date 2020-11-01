@@ -21,7 +21,7 @@ class Board:
         piece.move(row, col)
 
         if row == ROWS - 1 or row == 0:
-            piece.make_king()
+            piece.makeKing()
             if piece.color == WHITE:
                 self.whiteKings += 1
             else:

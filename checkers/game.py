@@ -19,6 +19,9 @@ class Game:
         self.turn = RED
         self.validMoves = {}
 
+    def winner(self):
+        return self.board.winner()
+
     def reset(self):
         self._init()
 
@@ -56,6 +59,7 @@ class Game:
             pygame.draw.circle(self.win, BLUE, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 15)
 
     def changeTurn(self):
+        self.validMoves = {}
         if self.turn == RED:
             self.turn = WHITE
         else:
