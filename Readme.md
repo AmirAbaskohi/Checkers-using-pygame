@@ -1,4 +1,4 @@
-#Checkers game using pygame
+# Checkers game using pygame
 
 <h1 align="center">Game using Python3</h1>
 
