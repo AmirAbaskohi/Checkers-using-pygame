@@ -1,9 +1,12 @@
 import pygame
 from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, RED, WHITE
 from checkers.game import Game
-from minimax.algorithm import minimax
+from minimax.minimax import minimax
 
 FPS = 60
+
+WHITE_DEPTH = 3
+RED_DEPTH = 3
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Checkers')
@@ -14,7 +17,7 @@ def getRowColFromMouse(pos):
     col = x // SQUARE_SIZE
     return row, col
 
-def main():
+if __name__ == '__main__':
     run = True
     clock = pygame.time.Clock()
     game = Game(WIN)
@@ -23,24 +26,21 @@ def main():
         clock.tick(FPS)
 
         if game.turn == WHITE:
-            value, newBoard = minimax(game.getBoard(), 3, True, game)
+            value, newBoard = minimax(game.getBoard(), WHITE_DEPTH, True, game)
             game.aiMove(newBoard)
 
         if game.winner() != None:
             print(game.winner())
             run = False
 
+        if game.turn == RED:
+            value, newBoard = minimax(game.getBoard(), RED_DEPTH, False, game)
+            game.aiMove(newBoard)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                row, col = getRowColFromMouse(pos)
-                game.select(row, col)
 
         game.update()
     
     pygame.quit()
-
-main()
